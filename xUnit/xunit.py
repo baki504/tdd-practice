@@ -39,17 +39,17 @@ class WasRun(TestCase):
 
 class TestResult:
     def __init__(self):
-        self.run_count = 0
+        self.runCount = 0
         self.errorCount = 0
 
     def testStarted(self):
-        self.run_count = self.run_count + 1
+        self.runCount = self.runCount + 1
 
     def testFailed(self):
         self.errorCount = self.errorCount + 1
 
     def summary(self):
-        return "%d run, %d failed" % (self.run_count, self.errorCount)
+        return "%d run, %d failed" % (self.runCount, self.errorCount)
 
 
 class TestCaseTest(TestCase):

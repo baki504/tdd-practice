@@ -3,8 +3,13 @@ package com.example;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 // fibonacci
 // 0 1 2 3 4 5 6 7
@@ -21,9 +26,20 @@ class FibonacciTest {
         return fib(n - 1) + fib(n - 2);
     }
 
-    @Test
-    void testFibonacci() {
-        int cases[][] = { { 0, 0 }, { 1, 1 }, { 2, 1 }, { 3, 2 }, { 4, 3 } };
-        Arrays.stream(cases).forEach(c -> assertEquals(c[1], fib(c[0])));
+    @ParameterizedTest
+    @MethodSource("fibonacciProvider")
+    void testFibonacci(int input, int expected) {
+        assertEquals(expected, fib(input));
     }
+
+    static List<Integer[]> fibonacciProvider() {
+        return Arrays.asList(new Integer[][] {
+                { 0, 0 },
+                { 1, 1 },
+                { 2, 1 },
+                { 3, 2 },
+                { 4, 3 }
+        });
+    }
+
 }
